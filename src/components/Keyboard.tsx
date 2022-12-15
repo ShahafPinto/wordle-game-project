@@ -1,10 +1,16 @@
+import { useContext } from "react";
+import { BoardContext } from "../providers/board-context";
+
+
 function Keyboard(){
+    const { moveNextCell, handlerClickLetter } = useContext(BoardContext);
+
     return(
         <div className="keyboard">
             <div className="keyboardrow1">
-                <button>W</button>
-                <button>E</button>
-                <button>R</button>
+                <button onClick={handlerClickLetter} id='W'>W</button>
+                <button onClick={moveNextCell}>E</button>
+                <button onClick={moveNextCell}>R</button>
                 <button>T</button>
                 <button>Y</button>
                 <button>U</button>
