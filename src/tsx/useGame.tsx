@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 // import App from '../App';
 import Board from '../components/Board';
-import {IBoardContext} from '../providers/board-context'
 
-const useGame: IBoardContext = ()=> {
+function useGame() {
     // const board = [['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']];
     // const [cellStatus, setCellStatus] = useState(false);
-    newBoard: [['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']],
-    board: [['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']],
-    
 
     const [board, setBoard]=useState([['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']])
     let newBoard= board;

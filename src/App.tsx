@@ -1,24 +1,28 @@
 // import logo from './logo.svg';
-import { Children, useState } from 'react';
+import { useState } from 'react';
 import './App.scss';
 import Board from './components/Board';
 import Keyboard from './components/Keyboard';
 import useGame from './tsx/useGame';
-import {BoardProvider} from './components/BoardContext';
+import {BoardContext} from './providers/board-context';
 
 function App() {
   const game = useGame();
-
-
+  const [board, setBoard] = useState([['']]);
+  const changeBoard = ()=>{
+    let newBoard = game.newBoard;
+    setBoard(newBoard);
+  }
+  
   
 
   return (
     <div className="App">
-      <BoardProvider>
+      <BoardContext.Provider value={game}>
         <header><h1>Wordle</h1></header>
         <Board></Board>
         <Keyboard></Keyboard>
-      </BoardProvider>
+      </BoardContext.Provider>
     </div>
   );
 }

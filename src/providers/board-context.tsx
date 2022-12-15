@@ -1,14 +1,11 @@
-import { createContext, JSXElementConstructor, ReactElement } from "react";
-import { JsxElement } from "typescript";
+import { createContext } from "react";
 
-export interface IBoardContext {
+interface IBoardContext {
     newBoard: string[][],
     board: string[][],
-    moveNextCell?: ()=> void,
-    handlerClickLetter?: (event:MouseEvent)=> void,
-    changeBoard?: ()=> void,
+    moveNextCell: ()=> void,
+    handlerClickLetter: ()=> void,
+    changeBoard: ()=> void
 }
-// React.FC<{}>
-
-export const BoardContext = createContext<IBoardContext | null>(null);
+export const BoardContext = createContext({} as any);
 

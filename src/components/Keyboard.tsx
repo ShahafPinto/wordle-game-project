@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { BoardContext } from "../providers/board-context";
 
-
 function Keyboard(){
     const { moveNextCell, handlerClickLetter } = useContext(BoardContext);
 
