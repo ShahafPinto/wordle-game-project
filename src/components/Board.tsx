@@ -45,9 +45,9 @@ function Board(): JSX.Element{
         }
         hendleChangeInput(letter,nextRowIndex,nextCellIndex);
     }
-
+    let currGuessUpdate: string[][] = inputBoard;
     const hendleChangeInput=(letter:string, rowIndex:number,cellIndex:number):void=>{
-        let currGuessUpdate: string[][] = inputBoard;
+        // let currGuessUpdate: string[][] = inputBoard;
         console.log('here2');
         currGuessUpdate[rowIndex][cellIndex] = letter;
         console.log(currGuessUpdate);
@@ -57,7 +57,7 @@ function Board(): JSX.Element{
     return(
         <>
         <div className="board">
-            {inputBoard.map((row: string[], rowIndex: number):JSX.Element=>(
+            {currGuessUpdate.map((row: string[], rowIndex: number):JSX.Element=>(
                 <div className="row" key={rowIndex}>
                     {row.map((cell:string, cellIndex:number):JSX.Element=>(
                         <input key={cellIndex} 
