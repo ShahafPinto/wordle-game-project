@@ -6,21 +6,23 @@ import { useState } from "react";
 //     setInputBoard: Function
 //   }
 function Board(): JSX.Element{
-    console.log('board renderd')
+    // console.log('board renderd')
     const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
     
     const [inputBoard, setInputBoard]= useState<string[][]>([['','','','',''],['','','','',''],['','','','',''],['','','','','']])
-    // const [currIndex, setCurrIndex]=useState([0,0]);
-    const currIndex = [0,0];
-    const newBoard = inputBoard;
-   
+    const [currIndex, setCurrIndex]=useState([0,0]);
+    
+    const newBoard:string[][] = [];
+    inputBoard.forEach((item)=>{
+        newBoard.push(item);
+    })
+
+    let nextRowIndex = currIndex[0];
+    let nextCellIndex = currIndex[1];
+
     useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
  
-
-    const handleKeyUp = (event: React.KeyboardEvent, rowIndex:number, cellIndex:number):void=>{
-        
-        if ( letters.includes(newBoard[rowIndex][cellIndex])){ 
-            console.log('key up')
+    const update=(letter:string):void=>{
             nextRowIndex = currIndex[0];
             nextCellIndex = currIndex[1];
             if(currIndex[1]==4 && currIndex[0]<3){
@@ -31,41 +33,30 @@ function Board(): JSX.Element{
                 nextCellIndex = currIndex[1]+1;
             }
             autoFocus(nextRowIndex,nextCellIndex);
-            hendleChangeInput(newBoard[rowIndex][cellIndex],currIndex[0],currIndex[1])     
+            hendleChangeInput(letter,currIndex[0],currIndex[1])     
             }
+    
+
+    const handleKeyUp = (event: React.KeyboardEvent, rowIndex:number, cellIndex:number):void=>{
+        if ( letters.includes(newBoard[rowIndex][cellIndex])){ 
+            update(newBoard[rowIndex][cellIndex]);
+        }
     }
 
     const autoFocus = (rowIndex:number, cellIndex:number):void=>{
         document.getElementById(`${rowIndex}${cellIndex}`)?.focus()
     }
-    let nextRowIndex = currIndex[0];
-    let nextCellIndex = currIndex[1];
 
     const onClick=(letter:string)=>{
-        nextRowIndex = currIndex[0];
-        nextCellIndex = currIndex[1];
-        console.log('onclick')
-
-        if(currIndex[1]==4 && currIndex[0]<3){
-            nextRowIndex = currIndex[0]+1;
-            nextCellIndex = 0;
-        }else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
-            nextRowIndex = currIndex[0];
-            nextCellIndex = currIndex[1]+1;
-        }
-        autoFocus(nextRowIndex,nextCellIndex);
-        hendleChangeInput(letter,currIndex[0],currIndex[1]);
-        
+        update(letter); 
     }
-    // let currGuessUpdate: string[][] = inputBoard;
+
     const hendleChangeInput=(letter:string, rowIndex:number,cellIndex:number):void=>{
         currIndex[0]=nextRowIndex;
         currIndex[1]=nextCellIndex;
-        console.log('on change');
         newBoard[rowIndex][cellIndex] = letter;
         console.log(newBoard);
         setInputBoard(newBoard);
-
     }
     
     return(
