@@ -1,10 +1,10 @@
 
 #root{
-  background-color: #dbdee1;
+  background-color:  #ffffff;
   .App {
   margin: auto;
   text-align: center;
-  background-color: #dbdee1;
+  background-color:  #ffffff;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 0.5fr 2.5fr 2fr;
@@ -16,13 +16,12 @@
     grid-area: header;
     width: 100%;
     h1{
-      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-family: 'Merriweather', serif;
       font-size: 250%;
     }
   }
   .board {
     grid-area: board;
-    background-color: #dbdee1;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: 100%;
@@ -42,6 +41,13 @@
     input{
       width: 80%;
       color: black;
+      box-shadow: rgb(236, 233, 233) 0px 5px;
+      border: #fcfcfc00 solid;
+      border-radius: 3px;
+      background-color: rgb(248, 244, 244);
+      text-align: center;
+      // border-radius: 1px;
+      // text-size-adjust: 100px
     }
   }
 
@@ -62,6 +68,8 @@
 
       button{
         min-width: 30px;
+        background-color:rgb(236, 233, 233) ;
+        border: #fcfcfc00 solid;
       }
     }
   }

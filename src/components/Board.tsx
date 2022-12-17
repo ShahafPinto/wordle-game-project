@@ -38,7 +38,7 @@ function Board(): JSX.Element{
     
 
     const handleKeyUp = (event: React.KeyboardEvent, rowIndex:number, cellIndex:number):void=>{
-        if ( letters.includes(newBoard[rowIndex][cellIndex])){ 
+        if ( letters.includes(newBoard[rowIndex][cellIndex].toLowerCase())){ 
             update(newBoard[rowIndex][cellIndex]);
         }
     }
@@ -54,7 +54,7 @@ function Board(): JSX.Element{
     const hendleChangeInput=(letter:string, rowIndex:number,cellIndex:number):void=>{
         currIndex[0]=nextRowIndex;
         currIndex[1]=nextCellIndex;
-        newBoard[rowIndex][cellIndex] = letter;
+        newBoard[rowIndex][cellIndex] = letter.toUpperCase();
         console.log(newBoard);
         setInputBoard(newBoard);
     }
