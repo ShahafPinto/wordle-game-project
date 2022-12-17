@@ -1,14 +1,8 @@
-html {
-  height: 100%;
-  /* align-items: center; */
 
-}
-h1{
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 250%;
-}
-.App {
-  /* align-items: center; */
+#root{
+  background-color: #dbdee1;
+  .App {
+  margin: auto;
   text-align: center;
   background-color: #dbdee1;
   display: grid;
@@ -16,70 +10,61 @@ h1{
   grid-template-rows: 0.5fr 2.5fr 2fr;
   grid-template-areas: "header" "board" "keyboard";
   height: 100%;
-  
-  margin: 0;
   max-width: 470px;
-}
-header{
-  grid-area: header;
-}
-.board {
-  grid-area: board;
-  background-color: #dbdee1;
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-columns: 100%;
-  padding: 2% 20%;
-  gap: 15px;
-  max-width: 100%;
-
-  .row {
-    display: grid;
-    height: 100%;
-    grid-template-rows: 100%;
+  }
+  header{
+    grid-area: header;
     width: 100%;
-    grid-template-columns: repeat(5, 0.5fr);
-    button, input{
-      margin: 1%;
-      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      
-    } input{
-      width: 100%;
+    h1{
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      font-size: 250%;
     }
-    
-  
+  }
+  .board {
+    grid-area: board;
+    background-color: #dbdee1;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 100%;
+    padding: 2% 20%;
+    gap: 15px;
+
+    .row {
+      display: grid;
+      height: 100%;
+      grid-template-rows: 100%;
+      grid-template-columns: repeat(5, 1fr);
+      input{
+        margin: 1%;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      } 
+    }
+    input{
+      width: 80%;
+    }
+  }
+
+  .keyboard {
+    grid-area: keyboard;
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 3px;
+    padding: 8%;
+    justify-items: center;
+    // width: 100%;
+
+    .keyboardrow {
+      display: grid;
+      grid-template-rows: 100%;
+      grid-template-columns: repeat(11, auto);
+      gap: 3px;
+
+      button{
+        min-width: 30px;
+      }
+    }
   }
 }
 
-.keyboard {
-  grid-area: keyboard;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 3px;
-  padding: 8%;
-  /* background-color: lightblue; */
-}
-
-.keyboard .keyboardrow1 {
-  display: grid;
-  grid-template-rows: 100%;
-  grid-template-columns: repeat(11, 1fr);
-  gap: 3px;
-}
-.keyboard .keyboardrow2 {
-  display: grid;
-  grid-template-rows: 100%;
-  grid-template-columns: 1fr repeat(9, 1fr) 1fr;
-  gap: 3px;
-}
-.keyboard .keyboardrow3 {
-  display: grid;
-  grid-template-rows: 100%;
-  grid-template-columns:  2fr repeat(8, 1fr) 1fr;
-  gap: 3px;
-  /* background-color: blue; */
-}
-.keyboard .keyboardrow3 #enter {
-  grid-column: 8/12;
+@media only screen and (min-width: 1450px) {
 }

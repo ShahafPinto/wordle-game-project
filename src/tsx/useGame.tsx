@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Board from '../components/Board';
 
 function useGame() {
-    // const board = [['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']];
-    // const [cellStatus, setCellStatus] = useState(false);
 
     const [board, setBoard]=useState([['nextCell','','','',''],['','','','',''],['','','','',''],['','','','','']])
     let newBoard= board;
