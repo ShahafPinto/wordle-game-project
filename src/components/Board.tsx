@@ -10,54 +10,68 @@ function Board(): JSX.Element{
     const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
     
     const [inputBoard, setInputBoard]= useState<string[][]>([['','','','',''],['','','','',''],['','','','',''],['','','','','']])
-    let currRowIndex:number = 0;
-    let currCellIndex:number = 0;
-        
-    useEffect(():void=>{autoFocus(currRowIndex,currCellIndex)},[])
+    // const [currIndex, setCurrIndex]=useState([0,0]);
+    const currIndex = [0,0];
+    const newBoard = inputBoard;
+   
+    useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
+ 
 
     const handleKeyUp = (event: React.KeyboardEvent, rowIndex:number, cellIndex:number):void=>{
-        if ( letters.includes(inputBoard[rowIndex][cellIndex])){ 
-            if(cellIndex==4 && rowIndex<3){
-                autoFocus(rowIndex+1, 0);
-                currRowIndex = rowIndex+1;
-                currCellIndex = 0;
-            }else if((cellIndex<4 && rowIndex==3)||(cellIndex<4 && rowIndex<3)){
-                autoFocus(rowIndex, cellIndex+1);
-                currRowIndex = rowIndex;
-                currCellIndex = cellIndex+1;
+        
+        if ( letters.includes(newBoard[rowIndex][cellIndex])){ 
+            console.log('key up')
+            nextRowIndex = currIndex[0];
+            nextCellIndex = currIndex[1];
+            if(currIndex[1]==4 && currIndex[0]<3){
+                nextRowIndex = currIndex[0]+1;
+                nextCellIndex = 0;
+            }else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
+                nextRowIndex = currIndex[0];
+                nextCellIndex = currIndex[1]+1;
             }
-        }
+            autoFocus(nextRowIndex,nextCellIndex);
+            hendleChangeInput(newBoard[rowIndex][cellIndex],currIndex[0],currIndex[1])     
+            }
     }
 
     const autoFocus = (rowIndex:number, cellIndex:number):void=>{
         document.getElementById(`${rowIndex}${cellIndex}`)?.focus()
     }
-    
+    let nextRowIndex = currIndex[0];
+    let nextCellIndex = currIndex[1];
+
     const onClick=(letter:string)=>{
-        let nextRowIndex = currRowIndex;
-        let nextCellIndex = currCellIndex;
-        if(currCellIndex==4 && currRowIndex<3){
-            currRowIndex = currRowIndex+1;
-            currCellIndex = 0;
-        }else if((currCellIndex<4 && currRowIndex==3)||(currCellIndex<4 && currRowIndex<3)){
-            currRowIndex = currRowIndex;
-            currCellIndex = currCellIndex+1;
+        nextRowIndex = currIndex[0];
+        nextCellIndex = currIndex[1];
+        console.log('onclick')
+
+        if(currIndex[1]==4 && currIndex[0]<3){
+            nextRowIndex = currIndex[0]+1;
+            nextCellIndex = 0;
+        }else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
+            nextRowIndex = currIndex[0];
+            nextCellIndex = currIndex[1]+1;
         }
-        hendleChangeInput(letter,nextRowIndex,nextCellIndex);
+        autoFocus(nextRowIndex,nextCellIndex);
+        hendleChangeInput(letter,currIndex[0],currIndex[1]);
+        
     }
-    let currGuessUpdate: string[][] = inputBoard;
+    // let currGuessUpdate: string[][] = inputBoard;
     const hendleChangeInput=(letter:string, rowIndex:number,cellIndex:number):void=>{
-        // let currGuessUpdate: string[][] = inputBoard;
-        console.log('here2');
-        currGuessUpdate[rowIndex][cellIndex] = letter;
-        console.log(currGuessUpdate);
-        setInputBoard(currGuessUpdate);
+        currIndex[0]=nextRowIndex;
+        currIndex[1]=nextCellIndex;
+        console.log('on change');
+        newBoard[rowIndex][cellIndex] = letter;
+        console.log(newBoard);
+        setInputBoard(newBoard);
+
     }
     
     return(
         <>
         <div className="board">
-            {currGuessUpdate.map((row: string[], rowIndex: number):JSX.Element=>(
+            {inputBoard.map((row: string[], rowIndex: number):JSX.Element=>(
                 <div className="row" key={rowIndex}>
                     {row.map((cell:string, cellIndex:number):JSX.Element=>(
                         <input key={cellIndex} 
