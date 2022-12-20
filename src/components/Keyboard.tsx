@@ -13,6 +13,7 @@ function Keyboard(props:StatusProps): JSX.Element{
     const hendleClick = (event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number):void=>{
         let key:string = keyboardKeys[rowIndex][keyIndex];
         if(!(key=='ENTER!' || key=='DEL')){
+            event.currentTarget.classList.add('clicked');
             props.onClickProp(key);
         }
         
