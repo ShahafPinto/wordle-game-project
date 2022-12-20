@@ -17,11 +17,20 @@ function Board(): JSX.Element{
         newBoard.push(item);
     })
 
+    const row:number[] = [];
+    row.push(currIndex[0]); 
+
+    const newCurrIndex:number[] = [];
+    currIndex.forEach((number)=>{
+        newCurrIndex.push(number);
+    })
+
     let nextRowIndex = currIndex[0];
     let nextCellIndex = currIndex[1];
 
     useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
- 
+    useEffect(()=>getWord,row);
+
     const update=(letter:string):void=>{
             nextRowIndex = currIndex[0];
             nextCellIndex = currIndex[1];
@@ -55,10 +64,18 @@ function Board(): JSX.Element{
         currIndex[0]=nextRowIndex;
         currIndex[1]=nextCellIndex;
         newBoard[rowIndex][cellIndex] = letter.toUpperCase();
-        console.log(newBoard);
+        // console.log(newBoard);
         setInputBoard(newBoard);
     }
     
+    const getWord=()=>{
+        let word:string ='';
+        newBoard[currIndex[1]].forEach((letter)=>{
+            word = word + letter
+        })
+        console.log(`the word is: ${word}`);      
+    }
+
     return(
         <>
         <div className="board">
