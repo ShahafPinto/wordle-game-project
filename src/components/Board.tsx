@@ -27,7 +27,7 @@ function Board(): JSX.Element{
 
     let nextRowIndex = currIndex[0];
     let nextCellIndex = currIndex[1];
-
+    // console.log(`currIndex:(${nextRowIndex},${nextCellIndex})`)
     useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
     useEffect(()=>getWord,row);
 
@@ -66,11 +66,13 @@ function Board(): JSX.Element{
         newBoard[rowIndex][cellIndex] = letter.toUpperCase();
         // console.log(newBoard);
         setInputBoard(newBoard);
+        const updateCurrIndex = [nextRowIndex,nextCellIndex];
+        setCurrIndex(updateCurrIndex);
     }
     
     const getWord=()=>{
         let word:string ='';
-        newBoard[currIndex[1]].forEach((letter)=>{
+        newBoard[currIndex[0]].forEach((letter)=>{
             word = word + letter
         })
         console.log(`the word is: ${word}`);      
