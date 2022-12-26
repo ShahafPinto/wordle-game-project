@@ -15,9 +15,21 @@
   header{
     grid-area: header;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
     h1{
       font-family: 'Merriweather', serif;
       font-size: 250%;
+    }
+    img{
+      width: 10%;
+      height: 30%;
+      // display: flex;
+      justify-content: space-evenly;
+      // align-items: center;
+
     }
   }
   .board {

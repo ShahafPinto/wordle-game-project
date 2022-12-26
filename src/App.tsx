@@ -1,5 +1,7 @@
 import './App.scss';
 import Board from './components/Board';
+import Header from './components/Header';
+
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import { Outlet } from 'react';
 
@@ -9,7 +11,7 @@ function App() {
     // <GameContext.Provider value={wordle}>
       <div className="App">
         {/* <BoardContext.Provider value={game}> */}
-          <header ><h1 className="">Wordle</h1></header>
+          <Header></Header>
           <Board></Board>
         {/* </BoardContext.Provider> */}
       </div>
