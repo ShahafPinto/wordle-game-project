@@ -15,9 +15,10 @@ function InfoModal() {
         show={appContext?.show}
         onHide={handleClose}
         backdrop="static"
-        keyboard={false}
+        // keyboard={false}
+        
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
           <Modal.Title>How To Play
             <h6>Guess the word in 4 tries.</h6>
           </Modal.Title>
