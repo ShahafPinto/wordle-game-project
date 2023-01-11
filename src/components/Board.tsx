@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import Keyboard from '../components/Keyboard';
 import { useState } from "react";
-// type StatusProps={
-//     inputBoard: string[][],
-//     setInputBoard: Function
-//   }
+
 function Board(): JSX.Element{
     // console.log('board renderd')
     const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -29,7 +26,7 @@ function Board(): JSX.Element{
     let nextCellIndex = currIndex[1];
     // console.log(`currIndex:(${nextRowIndex},${nextCellIndex})`)
     useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
-    useEffect(()=>getWord,row);
+    useEffect(()=>getGuess,row);
 
     const update=(letter:string):void=>{
             nextRowIndex = currIndex[0];
@@ -70,13 +67,35 @@ function Board(): JSX.Element{
         setCurrIndex(updateCurrIndex);
     }
     
-    const getWord=()=>{
-        let word:string ='';
+    const getGuess=()=>{
+        let guess:string ='';
         newBoard[currIndex[0]].forEach((letter)=>{
-            word = word + letter
+            guess = guess + letter
         })
-        console.log(`the word is: ${word}`);      
+        console.log(`the guess is: ${guess}`);
+        checkGuess(guess);      
     }
+
+    const word:string = 'HELLO'; //should be in Upletters
+    const checkGuess=(guess:string)=>{
+        console.log('checkgess')
+        // console.log(guess[0])
+        for(let index=0;index<5;index++){
+            if(word[index]==guess[index]){ //check bull
+                console.log(`bull in ${word[index]}`)
+                // document.querySelector('input')?.querySelector(`key=${index}`)?.classList.add('bull')
+                document.getElementById(`${currIndex[0]}${index}`)?.classList.add('bull');
+                // document.getElementById(`${currIndex[0]}${index}`)?.style.backgroundColor:'green';
+            }else{
+                for(let idx=0;idx<5;idx++){
+                    if(word[index]==guess[idx]){
+                        console.log(`cow in ${word[index]}`) //check cow
+                    }
+                }
+            }
+        }
+    }
+    
 
     return(
         <>
@@ -84,7 +103,8 @@ function Board(): JSX.Element{
             {inputBoard.map((row: string[], rowIndex: number):JSX.Element=>(
                 <div className="row" key={rowIndex}>
                     {row.map((cell:string, cellIndex:number):JSX.Element=>(
-                        <input key={cellIndex} 
+                        <input 
+                                key={cellIndex} 
                                 id={`${rowIndex}${cellIndex}`} 
                                 value={cell}
                                 onChange={({target:{value}}:React.ChangeEvent<HTMLInputElement>):void=>{
