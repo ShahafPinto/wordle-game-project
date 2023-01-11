@@ -5,7 +5,7 @@ import { GameContext } from '../providers/gameContext';
 
 function Keyboard(): JSX.Element{
     const game = useContext(GameContext)
-    console.log('bull in keboard:',game?.bull)
+    // console.log('bull in keboard:',game?.bull)
 
     // const keyboardKeys:string[][] = [
     //     ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -38,7 +38,6 @@ function Keyboard(): JSX.Element{
 
                         
                         <button key={keyIndex} 
-                                className=''
                                 id={`${rowIndex}${keyIndex}`}
                                 onClick={(event:React.MouseEvent<HTMLElement>)=>game?.hendleClick(event,rowIndex,keyIndex)}
                         >

@@ -3,8 +3,6 @@ import { createContext, SetStateAction } from "react";
 
 export interface IGameContext{
     letters:string[],
-    bull:string,
-    cow:string,
     inputBoard:string[][],
     setInputBoard:React.Dispatch<SetStateAction<string[][]>>,
     currIndex:number[],

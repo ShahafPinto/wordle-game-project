@@ -6,7 +6,6 @@ function useGame():IGameContext{
   let bull:string = '';
   let cow:string = '';
   
-  const [bullCow, setBullCow] = useState([bull,cow]);
   const [inputBoard, setInputBoard]= useState<string[][]>([['','','','',''],['','','','',''],['','','','',''],['','','','','']])
   const [currIndex, setCurrIndex]=useState([0,0]);
   
@@ -77,34 +76,40 @@ function useGame():IGameContext{
       checkGuess(guess);      
   }
 
-  
   const word:string = 'HELLO'; //should be in Upletters
   const checkGuess=(guess:string)=>{
-      bull = '';
-      cow = '';
-      console.log('checkgess')
-      // console.log(guess[0])
       for(let index=0;index<5;index++){
           if(word[index]==guess[index]){ //check bull
-              // console.log(`bull in ${word[index]}`)
               document.getElementById(`${currIndex[0]}${index}`)?.classList.add('bull');
-              bull = bull + word[index];
+              setBullCowOnKeyboard(word[index],'bull');
+
           }else{
               for(let idx=0;idx<5;idx++){
                   if(word[index]==guess[idx]){
-                      // console.log(`cow in ${word[index]}`) //check cow
                       document.getElementById(`${currIndex[0]}${idx}`)?.classList.add('cow');
-                      cow = cow + word[index];
+                      setBullCowOnKeyboard(word[index],'cow');
                   }
               }
           }
       }
-      const a = [bull,cow]
-      setBullCow(a)
-      // console.log(`bull : ${bull}`)
-      // console.log(`cow : ${cow}`)
-  }
-    
+    }
+
+    const setBullCowOnKeyboard=(letter:string,status:string)=>{
+      console.log(letter)
+      for(let row=0;row<3;row++){
+        if(keyboardKeys[row].includes(letter)){
+          console.log(`${letter} is include`)
+          const cell = keyboardKeys[row].indexOf(letter);
+          console.log(`id:${row}${cell}`)
+          document.querySelectorAll(`button`).forEach((button)=>{
+              if (button.id== String(row)+String(cell)){
+                button.classList.add(status);
+              } 
+          }) 
+          break
+        }
+      }
+    }
     const keyboardKeys:string[][] = [
       ['Q','W','E','R','T','Y','U','I','O','P'],
       ['A','S','D','F','G','H','J','K','L'],
@@ -126,8 +131,6 @@ function useGame():IGameContext{
   }
   return (
     {letters,
-      bull,
-      cow,
       inputBoard,
       setInputBoard,
       currIndex,
