@@ -1,58 +1,51 @@
 import React, { useState } from 'react';
-type StatusProps={
-    onClickProp: Function,
-    bull: string,
-    cow: string
-}
-function Keyboard(props:StatusProps): JSX.Element{
-    const bull = props.bull;
-    const cow = props.cow;
+import { useContext } from 'react';
+import { GameContext } from '../providers/gameContext';
 
-    console.log('bull in keboard:',bull)
 
-    
+function Keyboard(): JSX.Element{
+    const game = useContext(GameContext)
+    console.log('bull in keboard:',game?.bull)
 
-    const keyboardKeys:string[][] = [
-        ['Q','W','E','R','T','Y','U','I','O','P'],
-        ['A','S','D','F','G','H','J','K','L'],
-        ['DEL','Z','X','C','V','B','N','M','ENTER!']
-    ];
+    // const keyboardKeys:string[][] = [
+    //     ['Q','W','E','R','T','Y','U','I','O','P'],
+    //     ['A','S','D','F','G','H','J','K','L'],
+    //     ['DEL','Z','X','C','V','B','N','M','ENTER!']
+    // ];
 
-    const hendleClick = (event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number):void=>{
-        let key:string = keyboardKeys[rowIndex][keyIndex];
-        if(!(key=='ENTER!' || key=='DEL')){
-            event.currentTarget.classList.add('clicked');
-            props.onClickProp(key);
-        }
-    }
+    // const hendleClick = (event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number):void=>{
+    //     let key:string = keyboardKeys[rowIndex][keyIndex];
+    //     if(!(key=='ENTER!' || key=='DEL')){
+    //         event.currentTarget.classList.add('clicked');
+    //         game?.onClick(key);
+    //     }
+    // }
 
-    const checkIfBull=(rowIndex:number,cellIndex:number)=>{
-        if (!bull){
-            return false
-        }
-        if(bull.includes(keyboardKeys[rowIndex][cellIndex])){
-            return true
-        }
-    }
+    // const checkIfBull=(rowIndex:number,cellIndex:number)=>{
+    //     if (game?.bull){
+    //         return false
+    //     }
+    //     if(game?.bull.includes(keyboardKeys[rowIndex][cellIndex])){
+    //         return true
+    //     }
+    // }
     return(
 
         <div className="keyboard">
-            {keyboardKeys.map((keyrow:string[],rowIndex:number)=>(
+            {game?.keyboardKeys.map((keyrow:string[],rowIndex:number)=>(
                 <div className="keyboardrow" key={rowIndex}>
                     {keyrow.map((key:string, keyIndex:number)=>(
 
                         
-                        
                         <button key={keyIndex} 
                                 className=''
                                 id={`${rowIndex}${keyIndex}`}
-                                onClick={(event:React.MouseEvent<HTMLElement>)=>hendleClick(event,rowIndex,keyIndex)}
+                                onClick={(event:React.MouseEvent<HTMLElement>)=>game?.hendleClick(event,rowIndex,keyIndex)}
                         >
-                                    {keyboardKeys[rowIndex][keyIndex]}
+                                    {game?.keyboardKeys[rowIndex][keyIndex]}
                         </button>
                         
-                         
-                        
+
                     ))}
                 </div>
             ))}
