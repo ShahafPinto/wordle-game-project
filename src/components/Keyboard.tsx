@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 type StatusProps={
-    onClickProp: Function
+    onClickProp: Function,
+    bull: string,
+    cow: string
 }
 function Keyboard(props:StatusProps): JSX.Element{
+    const bull = props.bull;
+    const cow = props.cow;
+
+    console.log('bull in keboard:',bull)
+
+    
 
     const keyboardKeys:string[][] = [
         ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -16,8 +24,15 @@ function Keyboard(props:StatusProps): JSX.Element{
             event.currentTarget.classList.add('clicked');
             props.onClickProp(key);
         }
-        
+    }
 
+    const checkIfBull=(rowIndex:number,cellIndex:number)=>{
+        if (!bull){
+            return false
+        }
+        if(bull.includes(keyboardKeys[rowIndex][cellIndex])){
+            return true
+        }
     }
     return(
 
@@ -25,12 +40,19 @@ function Keyboard(props:StatusProps): JSX.Element{
             {keyboardKeys.map((keyrow:string[],rowIndex:number)=>(
                 <div className="keyboardrow" key={rowIndex}>
                     {keyrow.map((key:string, keyIndex:number)=>(
+
+                        
+                        
                         <button key={keyIndex} 
+                                className=''
                                 id={`${rowIndex}${keyIndex}`}
                                 onClick={(event:React.MouseEvent<HTMLElement>)=>hendleClick(event,rowIndex,keyIndex)}
                         >
                                     {keyboardKeys[rowIndex][keyIndex]}
                         </button>
+                        
+                         
+                        
                     ))}
                 </div>
             ))}

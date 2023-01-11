@@ -5,7 +5,10 @@ import { useState } from "react";
 function Board(): JSX.Element{
     // console.log('board renderd')
     const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    let bull:string = '';
+    let cow:string = '';
     
+    const [bullCow, setBullCow] = useState([bull,cow]);
     const [inputBoard, setInputBoard]= useState<string[][]>([['','','','',''],['','','','',''],['','','','',''],['','','','','']])
     const [currIndex, setCurrIndex]=useState([0,0]);
     
@@ -76,24 +79,32 @@ function Board(): JSX.Element{
         checkGuess(guess);      
     }
 
+    
     const word:string = 'HELLO'; //should be in Upletters
     const checkGuess=(guess:string)=>{
+        bull = '';
+        cow = '';
         console.log('checkgess')
         // console.log(guess[0])
         for(let index=0;index<5;index++){
             if(word[index]==guess[index]){ //check bull
-                console.log(`bull in ${word[index]}`)
-                // document.querySelector('input')?.querySelector(`key=${index}`)?.classList.add('bull')
+                // console.log(`bull in ${word[index]}`)
                 document.getElementById(`${currIndex[0]}${index}`)?.classList.add('bull');
-                // document.getElementById(`${currIndex[0]}${index}`)?.style.backgroundColor:'green';
+                bull = bull + word[index];
             }else{
                 for(let idx=0;idx<5;idx++){
                     if(word[index]==guess[idx]){
-                        console.log(`cow in ${word[index]}`) //check cow
+                        // console.log(`cow in ${word[index]}`) //check cow
+                        document.getElementById(`${currIndex[0]}${idx}`)?.classList.add('cow');
+                        cow = cow + word[index];
                     }
                 }
             }
         }
+        const a = [bull,cow]
+        setBullCow(a)
+        // console.log(`bull : ${bull}`)
+        // console.log(`cow : ${cow}`)
     }
     
 
@@ -119,7 +130,7 @@ function Board(): JSX.Element{
                 </div>
             ))}
         </div>  
-        <Keyboard onClickProp={onClick}></Keyboard>
+        <Keyboard onClickProp={onClick} bull={bull} cow={cow}></Keyboard>
         </>
     );
 }

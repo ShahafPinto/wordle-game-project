@@ -102,6 +102,12 @@
         background-color:rgb(173, 171, 171) ;
         border: #fcfcfc00 solid;
       }
+      button.clicked.bull{
+        background-color: green;
+      }
+      button.clicked.cow{
+        background-color: yellow;
+      }
     }
   }
 }
