@@ -69,11 +69,11 @@
       background-color: rgb(173, 171, 171);
       text-align: center;
     }
-    input.bull{
-      background-color: green;
-    }
     input.cow{
       background-color: yellow;
+    }
+    input.bull{
+      background-color: green;
     }
   }
 
@@ -102,11 +102,17 @@
         background-color:rgb(173, 171, 171) ;
         border: #fcfcfc00 solid;
       }
+      button.clicked.cow{
+        background-color: yellow;
+      }
       button.clicked.bull{
         background-color: green;
       }
-      button.clicked.cow{
+      button.cow{
         background-color: yellow;
+      }
+      button.bull{
+        background-color: green;
       }
     }
   }
