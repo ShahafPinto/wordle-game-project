@@ -7,7 +7,9 @@ export interface IHeadContext{
     setShowInfo: React.Dispatch<SetStateAction<boolean>>, 
     handleShow:()=>void,
     setShowForm: React.Dispatch<SetStateAction<boolean>>,
-    handleFormShow:()=>void
+    handleFormShow:()=>void,
+    username:string,
+    setUsername:React.Dispatch<SetStateAction<string>>
 }
 
 
