@@ -4,34 +4,35 @@ import { FormEvent, useContext, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function FormModal() {
-    
     const appContext = useContext(HeadContext);
+
+    
     const handleClose = ()=> {
-        appContext?.setShowForm(false)};
-        const handleChangeUsername=(event:any)=> { //לעדכן טייפ של האיבנט
-            const newValue = event.target.value;
-            appContext?.setUsername(newValue);
-        }
+        appContext?.setShowForm(false)
+    };
+    const handleChangeUsername=(event:any)=> { //לעדכן טייפ של האיבנט
+        const newValue = event.target.value;
+        appContext?.setUsername(newValue);
+    }
     
     const handleSubmit=(event:FormEvent)=>{
-        alert('A name was submitted: ' + appContext?.username)
+        // alert('A name was submitted: ' + appContext?.username)
         // event.preventDefault()
-
     }
-    useEffect(()=>{
-        localStorage.setItem('name',JSON.stringify(appContext?.username));
-      }, [appContext?.username])
+    // useEffect(()=>{
+    //     localStorage.setItem('name',JSON.stringify(appContext?.username));
+    //   }, [appContext?.username])
     
-      let value:string='';
+    //   let value:string='';
     
-      useEffect(()=>{
-        const storageUserName:string|null = (localStorage.getItem('name'));
-        if (storageUserName){
-          value = JSON.parse(storageUserName);
-          appContext?.setUsername(value);
-          console.log(value)
-        }
-      },[])
+    //   useEffect(()=>{
+    //     const storageUserName:string|null = (localStorage.getItem('name'));
+    //     if (storageUserName){
+    //       value = JSON.parse(storageUserName);
+    //       appContext?.setUsername(value);
+    //       console.log(value)
+    //     }
+    //   },[])
     
   return (
     <>

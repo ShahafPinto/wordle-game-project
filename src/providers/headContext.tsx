@@ -13,7 +13,4 @@ export interface IHeadContext{
     // inputName:string
 }
 
-
-
-
 export const HeadContext =createContext<IHeadContext | null>(null); 

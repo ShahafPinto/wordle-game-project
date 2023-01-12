@@ -7,52 +7,18 @@ import { HeadContext,IHeadContext } from "./providers/headContext";
 import Welcome from './components/welcome';
 import { GameContext,IGameContext } from "./providers/gameContext";
 import useGame from "./tsx/useGame";
+import useUser from './tsx/useUser';
 
 
 function App() {
-  const [username, setUsername] = useState('guest');
-  // let inputName = username;
-  
-  // useEffect(()=>{
-  //   localStorage.setItem('name',JSON.stringify(username));
-  // }, [username])
-
-  // let value:string='';
-
-  // useEffect(()=>{
-  //   const storageUserName:string|null = (localStorage.getItem('name'));
-  //   if (storageUserName){
-  //     value = JSON.parse(storageUserName);
-  //     setUsername(value);
-  //     console.log(value)
-  //   }
-  // },[])
-
-    // const [isDisabled, setIsDisabled] = useState(true);
   const [page,setPage] = useState('welcome');
-  const [show, setShowInfo] = useState(false);
-  const [showForm,setShowForm] = useState(false);
-
-  const handleShow = () => setShowInfo(true);
-  const handleFormShow= ()=> setShowForm(true);
-
-  const valuesHeadContext:IHeadContext={
-    show:show,
-    showForm:showForm,
-    setShowInfo:setShowInfo, 
-    handleShow:handleShow,
-    setShowForm:setShowForm,
-    handleFormShow:handleFormShow,
-    username:username,
-    setUsername:setUsername
-    
-  };
+  
   const getUsername=()=>{
     const storageUserName:string|null = (localStorage.getItem('name'));
     if (storageUserName){
       return JSON.parse(storageUserName);
   }}
-  
+  const user = useUser()
   const game = useGame()
   return (
 
@@ -60,13 +26,13 @@ function App() {
         
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage} username={getUsername()}/>
+            <Welcome setPage={setPage} username={user.username}/>
           </>
         }
         {page ==='enterTheGame' &&
           <>
             <GameContext.Provider value={game}>
-              <HeadContext.Provider value={valuesHeadContext}>
+              <HeadContext.Provider value={user}>
                 <Header></Header>
                 <Board></Board>
               </HeadContext.Provider>
