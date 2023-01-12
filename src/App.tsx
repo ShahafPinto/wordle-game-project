@@ -11,15 +11,26 @@ import useGame from "./tsx/useGame";
 
 function App() {
   const [username, setUsername] = useState('guest');
+  // let inputName = username;
+  
+  // useEffect(()=>{
+  //   localStorage.setItem('name',JSON.stringify(username));
+  // }, [username])
 
-  useEffect(()=>{
-    localStorage.setItem('user-name',JSON.stringify(username));
-  }, [username])
+  // let value:string='';
+
+  // useEffect(()=>{
+  //   const storageUserName:string|null = (localStorage.getItem('name'));
+  //   if (storageUserName){
+  //     value = JSON.parse(storageUserName);
+  //     setUsername(value);
+  //     console.log(value)
+  //   }
+  // },[])
 
     // const [isDisabled, setIsDisabled] = useState(true);
   const [page,setPage] = useState('welcome');
   const [show, setShowInfo] = useState(false);
-
   const [showForm,setShowForm] = useState(false);
 
   const handleShow = () => setShowInfo(true);
@@ -34,8 +45,13 @@ function App() {
     handleFormShow:handleFormShow,
     username:username,
     setUsername:setUsername
+    
   };
-
+  const getUsername=()=>{
+    const storageUserName:string|null = (localStorage.getItem('name'));
+    if (storageUserName){
+      return JSON.parse(storageUserName);
+  }}
   
   const game = useGame()
   return (
@@ -44,7 +60,7 @@ function App() {
         
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage} username={username}/>
+            <Welcome setPage={setPage} username={getUsername()}/>
           </>
         }
         {page ==='enterTheGame' &&

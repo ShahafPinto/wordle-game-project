@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 import { HeadContext } from '../providers/headContext';
-import { useContext } from 'react';
+import { FormEvent, useContext, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function FormModal() {
@@ -13,9 +13,25 @@ function FormModal() {
             appContext?.setUsername(newValue);
         }
     
-    const handleSubmit=(event:any)=>{ //לעדכן טייפ של האיבנט
+    const handleSubmit=(event:FormEvent)=>{
         alert('A name was submitted: ' + appContext?.username)
+        // event.preventDefault()
+
     }
+    useEffect(()=>{
+        localStorage.setItem('name',JSON.stringify(appContext?.username));
+      }, [appContext?.username])
+    
+      let value:string='';
+    
+      useEffect(()=>{
+        const storageUserName:string|null = (localStorage.getItem('name'));
+        if (storageUserName){
+          value = JSON.parse(storageUserName);
+          appContext?.setUsername(value);
+          console.log(value)
+        }
+      },[])
     
   return (
     <>
@@ -37,7 +53,7 @@ function FormModal() {
                     id="username-input"
                     type="text"
                     onChange={handleChangeUsername}
-                    // value={appContext?.username}
+                    // value={appContext?.inputName}
                     />
                 </div>
                 <input type="submit" value="submit" id="login-button" />

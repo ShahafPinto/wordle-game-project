@@ -10,6 +10,7 @@ export interface IHeadContext{
     handleFormShow:()=>void,
     username:string,
     setUsername:React.Dispatch<SetStateAction<string>>
+    // inputName:string
 }
 
 
