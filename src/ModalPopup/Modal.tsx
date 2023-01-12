@@ -7,7 +7,7 @@ function InfoModal() {
     const appContext = useContext(HeadContext);
 
     const handleClose = ()=> {
-        appContext?.setShow(false)};
+        appContext?.setShowInfo(false)};
 
   return (
     <>

@@ -3,8 +3,11 @@ import { createContext, SetStateAction } from "react";
 
 export interface IHeadContext{
     show: boolean,
-    setShow: React.Dispatch<SetStateAction<boolean>>, 
-    handleShow:()=>void
+    showForm: boolean,
+    setShowInfo: React.Dispatch<SetStateAction<boolean>>, 
+    handleShow:()=>void,
+    setShowForm: React.Dispatch<SetStateAction<boolean>>,
+    handleFormShow:()=>void
 }
 
 

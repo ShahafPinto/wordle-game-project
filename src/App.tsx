@@ -11,14 +11,23 @@ import useContext from 'react';
 
 function App() {
   const [page,setPage] = useState('welcome');
-  const [show, setShow] = useState(false);
+  const [show, setShowInfo] = useState(false);
 
-  const handleShow = () => setShow(true);
+  const [showForm,setShowForm] = useState(false);
+
+  const handleShow = () => setShowInfo(true);
+  const handleFormShow= ()=> setShowForm(true);
+
   const valuesHeadContext:IHeadContext={
     show:show,
-    setShow:setShow, 
-    handleShow:handleShow
+    showForm:showForm,
+    setShowInfo:setShowInfo, 
+    handleShow:handleShow,
+    setShowForm:setShowForm,
+    handleFormShow:handleFormShow
   };
+
+  
   const game = useGame()
   return (
 
