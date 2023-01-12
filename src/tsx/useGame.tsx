@@ -3,8 +3,6 @@ import { IGameContext } from '../providers/gameContext';
 
 function useGame():IGameContext{
   const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  let bull:string = '';
-  let cow:string = '';
   
   const [inputBoard, setInputBoard]= useState<string[][]>([['','','','',''],['','','','',''],['','','','',''],['','','','','']])
   const [currIndex, setCurrIndex]=useState([0,0]);
@@ -24,9 +22,6 @@ function useGame():IGameContext{
 
   let nextRowIndex = currIndex[0];
   let nextCellIndex = currIndex[1];
-  // console.log(`currIndex:(${nextRowIndex},${nextCellIndex})`)
-  // useEffect(():void=>{autoFocus(currIndex[0],currIndex[1])},[])
-  // useEffect(()=>getGuess,row);
 
   const update=(letter:string):void=>{
           nextRowIndex = currIndex[0];
@@ -34,12 +29,17 @@ function useGame():IGameContext{
           if(currIndex[1]==4 && currIndex[0]<3){
               nextRowIndex = currIndex[0]+1;
               nextCellIndex = 0;
-          }else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
+          }
+          else if(currIndex[1]==4 && currIndex[0]==3){
+              getGuess();
+              checkFail();
+          }
+          else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
               nextRowIndex = currIndex[0];
               nextCellIndex = currIndex[1]+1;
           }
           autoFocus(nextRowIndex,nextCellIndex);
-          hendleChangeInput(letter,currIndex[0],currIndex[1])     
+          hendleChangeInput(letter,currIndex[0],currIndex[1])   
           }
   
 
@@ -75,14 +75,13 @@ function useGame():IGameContext{
       console.log(`the guess is: ${guess}`);
       checkGuess(guess);      
   }
-
+  
   const word:string = 'HELLO'; //should be in Upletters
   const checkGuess=(guess:string)=>{
       for(let index=0;index<5;index++){
           if(word[index]==guess[index]){ //check bull
               document.getElementById(`${currIndex[0]}${index}`)?.classList.add('bull');
               setBullCowOnKeyboard(word[index],'bull');
-
           }else{
               for(let idx=0;idx<5;idx++){
                   if(word[index]==guess[idx]){
@@ -91,44 +90,47 @@ function useGame():IGameContext{
                   }
               }
           }
-      }
-    }
+      }if(guess==word){
+        const dialog = document.getElementById('successDialog') as HTMLDialogElement
+        dialog.show();
+      }}
+    
+  const checkFail=()=>{
+    const dialog = document.getElementById('failDialog') as HTMLDialogElement
+    dialog.show();
+  }
 
-    const setBullCowOnKeyboard=(letter:string,status:string)=>{
-      console.log(letter)
-      for(let row=0;row<3;row++){
-        if(keyboardKeys[row].includes(letter)){
-          console.log(`${letter} is include`)
-          const cell = keyboardKeys[row].indexOf(letter);
-          console.log(`id:${row}${cell}`)
-          document.querySelectorAll(`button`).forEach((button)=>{
-              if (button.id== String(row)+String(cell)){
-                button.classList.add(status);
-              } 
-          }) 
-          break
-        }
+  const setBullCowOnKeyboard=(letter:string,status:string)=>{
+    // console.log(letter)
+    for(let row=0;row<3;row++){
+      if(keyboardKeys[row].includes(letter)){
+        // console.log(`${letter} is include`)
+        const cell = keyboardKeys[row].indexOf(letter);
+        // console.log(`id:${row}${cell}`)
+        document.querySelectorAll(`button`).forEach((button)=>{
+            if (button.id== String(row)+String(cell)){
+              button.classList.add(status);
+            } 
+        }) 
+        break
       }
     }
-    const keyboardKeys:string[][] = [
-      ['Q','W','E','R','T','Y','U','I','O','P'],
-      ['A','S','D','F','G','H','J','K','L'],
-      ['DEL','Z','X','C','V','B','N','M','ENTER!']
+  }
+
+  const keyboardKeys:string[][] = [
+    ['Q','W','E','R','T','Y','U','I','O','P'],
+    ['A','S','D','F','G','H','J','K','L'],
+    ['DEL','Z','X','C','V','B','N','M','ENTER!']
   ];
 
-      const hendleClick = (event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number):void=>{
-        let key:string = keyboardKeys[rowIndex][keyIndex];
-        if(!(key=='ENTER!' || key=='DEL')){
-            event.currentTarget.classList.add('clicked');
-            onClick(key);
-        }
+  const hendleClick = (event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number):void=>{
+    let key:string = keyboardKeys[rowIndex][keyIndex];
+    if(!(key=='ENTER!' || key=='DEL')){
+        event.currentTarget.classList.add('clicked');
+        onClick(key);
     }
-
-    const checkIfBull=(rowIndex:number,cellIndex:number)=>{
-      if(bull.includes(keyboardKeys[rowIndex][cellIndex])){
-          return true
-      }return false
   }
+
   return (
     {letters,
       inputBoard,
@@ -149,9 +151,7 @@ function useGame():IGameContext{
       word,
       checkGuess,
       keyboardKeys,
-      hendleClick,
-      checkIfBull
-      
+      hendleClick
     }
   )
 }

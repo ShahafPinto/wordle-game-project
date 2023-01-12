@@ -21,8 +21,8 @@ export interface IGameContext{
     word:string,
     checkGuess:(guess:string)=>void,
     keyboardKeys:string[][],
-    hendleClick:(event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number)=>void,
-    checkIfBull:(rowIndex:number,cellIndex:number)=>boolean
+    hendleClick:(event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number)=>void
+    // checkIfBull:(rowIndex:number,cellIndex:number)=>boolean
 }
 
 

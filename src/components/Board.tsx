@@ -30,7 +30,13 @@ function Board(): JSX.Element{
                     ))}
                 </div>
             ))}
-        </div>  
+        </div> 
+        <dialog id='successDialog'>
+            success!!
+        </dialog> 
+        <dialog id='failDialog'>
+            fail!!
+        </dialog>
         <Keyboard></Keyboard>
         {/* <Keyboard onClickProp={game?.onClick} bull={game?.bull} cow={game?.cow}></Keyboard> */}
         </>
