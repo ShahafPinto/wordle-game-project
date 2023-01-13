@@ -11,22 +11,18 @@ import useUser from './tsx/useUser';
 
 
 function App() {
-  const [page,setPage] = useState('welcome');
-  
-  const getUsername=()=>{
-    const storageUserName:string|null = (localStorage.getItem('name'));
-    if (storageUserName){
-      return JSON.parse(storageUserName);
-  }}
   const user = useUser()
   const game = useGame()
+  const [page,setPage] = useState('welcome');
+ 
+  
   return (
 
       <div className="App">
         
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage} username={user.username}/>
+            <Welcome setPage={setPage} username={user.getUsername()}/>
           </>
         }
         {page ==='enterTheGame' &&
