@@ -32,7 +32,7 @@ function useGame():IGameContext{
           }
           else if(currIndex[1]==4 && currIndex[0]==3){
               getGuess();
-              checkFail();
+              // checkFail();
           }
           else if((currIndex[1]<4 && currIndex[0]==3)||(currIndex[1]<4 && currIndex[0]<3)){
               nextRowIndex = currIndex[0];
@@ -93,6 +93,8 @@ function useGame():IGameContext{
       }if(guess==word){
         const dialog = document.getElementById('successDialog') as HTMLDialogElement
         dialog.show();
+      }if(currIndex[0]==3 && guess!=word){
+        checkFail();
       }}
     
   const checkFail=()=>{
