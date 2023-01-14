@@ -1,38 +1,34 @@
 import './App.scss';
 import Board from './components/Board';
 import Header from './components/Header';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HeadContext,IHeadContext } from "./providers/headContext";
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Welcome from './components/welcome';
 import { GameContext,IGameContext } from "./providers/gameContext";
 import useGame from "./tsx/useGame";
-import useContext from 'react';
+import useUser from './tsx/useUser';
+
 
 function App() {
-  const [page,setPage] = useState('welcome');
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
-  const valuesHeadContext:IHeadContext={
-    show:show,
-    setShow:setShow, 
-    handleShow:handleShow
-  };
+  const user = useUser()
   const game = useGame()
+  const [page,setPage] = useState('welcome');
+ 
+  
   return (
 
       <div className="App">
         
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage}/>
+            <Welcome setPage={setPage} username={user.getUsername()}/>
           </>
         }
         {page ==='enterTheGame' &&
           <>
             <GameContext.Provider value={game}>
-              <HeadContext.Provider value={valuesHeadContext}>
+              <HeadContext.Provider value={user}>
                 <Header></Header>
                 <Board></Board>
               </HeadContext.Provider>
