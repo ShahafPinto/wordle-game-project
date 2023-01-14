@@ -11,9 +11,9 @@ export interface IHeadContext{
     handleFormShow:()=>void,
     username:Istorage,
     setUsername:React.Dispatch<SetStateAction<Istorage>>,
-    getUsername: ()=>string
+    getUsername: ()=>string,
+    logOut: boolean
     
-    // inputName:string
 }
 
 export const HeadContext =createContext<IHeadContext | null>(null); 

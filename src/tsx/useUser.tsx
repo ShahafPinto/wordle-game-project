@@ -11,14 +11,23 @@ function useUser():IHeadContext{
     const handleShow = () => setShowInfo(true);
     const handleFormShow= ()=> setShowForm(true);
     
+    let logOut:boolean = false;
+    // const [logout,setLogout] = useState(false);
+
     const getUsername=()=>{
         const storageUserName:string|null = localStorage.getItem('name');
         if (storageUserName){
+            if(JSON.parse(storageUserName)=='guest'){
+                logOut=false
+                
+            }else{
+                logOut=true 
+            }
             return JSON.parse(storageUserName);
         }else{
+            logOut=false
             return 'guest'
         }   
-         
     }
     
     const [username, setUsername] = React.useState<Istorage> (getUsername);
@@ -27,6 +36,11 @@ function useUser():IHeadContext{
         localStorage.setItem('name',JSON.stringify(username));
       }, [username])
     
+      
+    
+
+
+
     //   useEffect(()=>{
     //     console.log('here')
     //     const storageUserName:Istorage = {}
@@ -44,8 +58,8 @@ function useUser():IHeadContext{
             handleFormShow,
             username,
             setUsername,
-            getUsername
-            
+            getUsername,
+            logOut
         }
       )
 }
