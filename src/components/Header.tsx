@@ -1,35 +1,27 @@
 import imageToAdd from "./info.png";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { HeadContext } from "../providers/headContext";
-import InfoModal from "../ModalPopup/Modal";
+import InfoModal from "../ModalPopup/infoModal";
 import FormModal from "../ModalPopup/formModal";
-import useUser from "../tsx/useUser";
 
 function Header() {
-  const appContext = useContext(HeadContext);
-  const user = useUser()
-
-  const [logout,setLogout] = useState(user.logOut);
-  const handleLogOut=()=>{
-    localStorage.removeItem('name')
-    setLogout(false);
-  }
+  const user = useContext(HeadContext)
 
   return (
     <>
         <header >
-          {logout && (
+          {user?.logout && (
             <>
                 Hi {user.getUsername()}!
-              <button onClick={handleLogOut}>Log out</button>
+              <button onClick={user.handleLogOut}>Log out</button>
             </>
           )}
-          {!logout && (
-              <button onClick={appContext?.handleFormShow}>Log In</button>
+          {!user?.logout && (
+              <button onClick={user?.handleFormShow}>Log In</button>
           )}
             
             <h1 className="">Wordle</h1>
-            <img onClick={appContext?.handleShow} src={imageToAdd} alt="info image link"/>
+            <img onClick={user?.handleShowInfo} src={imageToAdd} alt="info link"/>
         </header>
         <InfoModal/>
         <FormModal/>

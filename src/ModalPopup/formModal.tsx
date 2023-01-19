@@ -1,11 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
 import { HeadContext } from '../providers/headContext';
-import { FormEvent, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import useUser from '../tsx/useUser';
 
 function FormModal() {
     const appContext = useContext(HeadContext);
-
     
     const handleClose = ()=> {
         appContext?.setShowForm(false)
@@ -14,26 +14,6 @@ function FormModal() {
         const newValue = event.target.value;
         appContext?.setUsername(newValue);
     }
-    
-    const handleSubmit=(event:FormEvent)=>{
-        
-        // alert('A name was submitted: ' + appContext?.username)
-        // event.preventDefault()
-    }
-    // useEffect(()=>{
-    //     localStorage.setItem('name',JSON.stringify(appContext?.username));
-    //   }, [appContext?.username])
-    
-    //   let value:string='';
-    
-    //   useEffect(()=>{
-    //     const storageUserName:string|null = (localStorage.getItem('name'));
-    //     if (storageUserName){
-    //       value = JSON.parse(storageUserName);
-    //       appContext?.setUsername(value);
-    //       console.log(value)
-    //     }
-    //   },[])
     
   return (
     <>
@@ -48,7 +28,7 @@ function FormModal() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div>
                     <label htmlFor="username-input">user name: </label>
                     <input

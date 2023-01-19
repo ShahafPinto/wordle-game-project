@@ -13,7 +13,7 @@ export interface IGameContext{
     nextRowIndex: number,
     nextCellIndex: number,
     update:(letter:string)=>void,
-    handleKeyUp:(event: React.KeyboardEvent, rowIndex:number, cellIndex:number)=>void,
+    handleKeyUp:(rowIndex:number, cellIndex:number)=>void,
     autoFocus:(rowIndex:number, cellIndex:number)=>void,
     onClick:(letter:string)=>void,
     hendleChangeInput:(letter:string, rowIndex:number,cellIndex:number)=>void,
@@ -24,8 +24,6 @@ export interface IGameContext{
     hendleClick:(event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number)=>void
     // checkIfBull:(rowIndex:number,cellIndex:number)=>boolean
 }
-
-
 
 
 export const GameContext =createContext<IGameContext | null>(null);

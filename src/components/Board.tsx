@@ -6,7 +6,7 @@ import {useContext} from 'react';
 function Board(): JSX.Element{
     const game = useContext(GameContext)
     
-    useEffect(():void=>{game?.autoFocus(game.currIndex[0],game.currIndex[1])},[])
+    useEffect(():void=>game?.autoFocus(game.currIndex[0],game.currIndex[1]),[])
     useEffect(()=>game?.getGuess,game?.row);
     
     return(
@@ -22,7 +22,7 @@ function Board(): JSX.Element{
                                 onChange={({target:{value}}:React.ChangeEvent<HTMLInputElement>):void=>{
                                     game.hendleChangeInput(value,rowIndex,cellIndex);
                                 }} 
-                                onKeyUp={(event: React.KeyboardEvent)=>game.handleKeyUp(event, rowIndex,cellIndex)}
+                                onKeyUp={()=>game.handleKeyUp(rowIndex,cellIndex)}
                                 minLength={1} 
                                 maxLength={1} 
                                 required
@@ -38,7 +38,6 @@ function Board(): JSX.Element{
             fail!!
         </dialog>
         <Keyboard></Keyboard>
-        {/* <Keyboard onClickProp={game?.onClick} bull={game?.bull} cow={game?.cow}></Keyboard> */}
         </>
     );
 }
