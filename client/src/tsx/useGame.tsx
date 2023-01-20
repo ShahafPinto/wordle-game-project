@@ -81,6 +81,7 @@ function useGame():IGameContext{
   const word:string = 'HELLO'; //should be in Upletters
 
   const getGuess=()=>{
+    console.log('hereeee')
       let guess:string ='';
       newBoard[currIndex[0]].forEach((letter)=>{
           guess = guess + letter
