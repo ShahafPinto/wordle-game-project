@@ -1,9 +1,7 @@
-import './App.scss';
 import Board from './components/Board';
 import Header from './components/Header';
 import { useState } from "react";
 import { HeadContext } from "./providers/headContext";
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Welcome from './components/welcome';
 import { GameContext } from "./providers/gameContext";
 import useGame from "./tsx/useGame";
@@ -16,10 +14,11 @@ function App() {
   const [page,setPage] = useState('welcome');
  
   return (
-      <div className="App">
+      <div className="appConteiner">
+        <div className='App'>
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage} username={user.getUsername()}/>
+            <Welcome setPage={setPage} username={'walcome-' + user.getUsername()}/>
           </>
         }
         {page ==='enterTheGame' &&
@@ -32,6 +31,7 @@ function App() {
             </GameContext.Provider>
           </>
         }
+      </div>
       </div>
   );
 }

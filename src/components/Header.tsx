@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { HeadContext } from "../providers/headContext";
 import InfoModal from "../ModalPopup/infoModal";
 import FormModal from "../ModalPopup/formModal";
-
+import '../App.scss';
 function Header() {
   const user = useContext(HeadContext)
 

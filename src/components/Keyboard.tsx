@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { GameContext } from '../providers/gameContext';
-
+import '../App.scss';
 
 function Keyboard(): JSX.Element{
     const game = useContext(GameContext)
