@@ -18,7 +18,7 @@ function App() {
         <div className='App'>
         {page === 'welcome' && 
           <>
-            <Welcome setPage={setPage} username={'walcome-' + user.getUsername()}/>
+            <Welcome setPage={setPage} username={'welcome-' + user.getUsername()}/>
           </>
         }
         {page ==='enterTheGame' &&

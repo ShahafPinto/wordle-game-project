@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IGameContext } from '../providers/gameContext';
 
 function useGame():IGameContext{
@@ -78,7 +78,14 @@ function useGame():IGameContext{
   }
   
   //logic methods
-  const word:string = 'HELLO'; //should be in Upletters
+  const [word,setWordApi]=useState('');
+  useEffect(()=>{
+    fetch('/words').then(
+      (response) => response.json()
+    ).then((wordApi)=>{
+      setWordApi(wordApi)
+    })
+  },[])
 
   const getGuess=()=>{
     console.log('hereeee')
