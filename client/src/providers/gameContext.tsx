@@ -18,8 +18,8 @@ export interface IGameContext{
     onClick:(letter:string)=>void,
     hendleChangeInput:(letter:string, rowIndex:number,cellIndex:number)=>void,
     getGuess:()=>void,
-    word:string,
-    checkGuess:(guess:string)=>void,
+    
+    sendGuess:(guess:string)=>void,
     keyboardKeys:string[][],
     hendleClick:(event:React.MouseEvent<HTMLElement>, rowIndex:number, keyIndex:number)=>void
     // checkIfBull:(rowIndex:number,cellIndex:number)=>boolean
