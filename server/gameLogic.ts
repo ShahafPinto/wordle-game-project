@@ -9,7 +9,7 @@ let state:Istate = [false,"","","","",""]
 
 export const setNewWord = ():void=>{
   word = wordsApi.words[Math.floor(Math.random() * wordsApi.words.length)]
-  // console.log('the word: ',word)
+  console.log('the word: ',word)
 }
 
 export const checkGuess=(guess:string):Istate=>{

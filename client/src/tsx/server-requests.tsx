@@ -1,9 +1,8 @@
 
 export async function getStartGameFromServer() {
-    await fetch('/words')
-    .then((response) => response.json())
+    await fetch('http://localhost:3333/words')
+    // .then((response) => response.json())
 }
-
 
 export async function sendGuess(guess:string){
     console.log('check new guess')   
@@ -11,7 +10,6 @@ export async function sendGuess(guess:string){
             method: 'POST',
             headers: {"content-Type": "application/json"},
             body: JSON.stringify({guess})
-    })
-        
+    })  
     return await getResult.json()
 }
