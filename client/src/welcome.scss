@@ -1,6 +1,4 @@
-// .appConteiner{
-//     background: #000; 
-// }
+
 .welcome-page{
     margin: 0;
     padding: 0;
@@ -11,14 +9,13 @@
         justify-content: center;
         align-items: center; 
         min-height: 100vh;
-        background: #000;
+        color: rgb(33, 12, 88);
         .wavy{
             margin: 13%;
             position: relative;
             -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0,0,0,0.2));
             span{
                 display: inline-block;
-                color: #fff;
                 font-size: 2.5em;
                 text-transform: uppercase;
                 animation: animate 1s ease-in-out infinite;
@@ -26,10 +23,8 @@
             }
         }
         button{
-            background: rgb(105, 105, 105);
-            color: #fff;
+            border-color: rgb(11, 167, 185);
         }
-
     }
 }
 
