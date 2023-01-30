@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { IGameContext } from '../providers/gameContext';
 import { sendGuess } from './server-requests';
-export type Istate = [boolean,string,string,string,string,string]
 
-function useGame():IGameContext{
+export default function useGame():IGameContext{
 
   const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyboardKeys:string[][] = [
@@ -128,30 +127,17 @@ function useGame():IGameContext{
     }
   }
 
-  
   return (
-    {letters,
-      inputBoard,
-      setInputBoard,
+    { inputBoard,
       currIndex,
-      setCurrIndex,
-      newBoard,
       row,
-      newCurrIndex,
-      nextRowIndex,
-      nextCellIndex ,
-      update,
       handleKeyUp,
       autoFocus,
-      onClick,
       hendleChangeInput,
       getGuess,
-      sendGuess,
       keyboardKeys,
       hendleClick
     }
   )
 }
-
-export default useGame;
 

@@ -1,5 +1,4 @@
 import { createContext, SetStateAction } from "react";
-import { Istorage } from "../tsx/useUser";
 
 export interface IHeadContext{
     show: boolean,
@@ -8,13 +7,10 @@ export interface IHeadContext{
     handleShowInfo:()=>void,
     setShowForm: React.Dispatch<SetStateAction<boolean>>,
     handleFormShow:()=>void,
-    username:Istorage,
-    setUsername:React.Dispatch<SetStateAction<Istorage>>,
+    setUsername:React.Dispatch<SetStateAction<string>>,
     getUsername: ()=>string,
-    logOut: boolean,
     handleLogOut: ()=>void,
     logout:boolean
-    
 }
 
 export const HeadContext =createContext<IHeadContext | null>(null); 

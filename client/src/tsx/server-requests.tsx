@@ -1,7 +1,6 @@
 
 export async function getStartGameFromServer() {
     await fetch('http://localhost:3333/words')
-    // .then((response) => response.json())
 }
 
 export async function sendGuess(guess:string){

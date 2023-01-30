@@ -4,7 +4,8 @@ import { HeadContext } from "../providers/headContext";
 import InfoModal from "../ModalPopup/infoModal";
 import FormModal from "../ModalPopup/formModal";
 import '../App.scss';
-function Header() {
+
+export default function Header() {
   const user = useContext(HeadContext)
 
   return (
@@ -28,5 +29,3 @@ function Header() {
     </>
   )
 }
-
-export default Header;

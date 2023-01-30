@@ -11,6 +11,8 @@ const router = express.Router();
 // to use body-parser as middle-ware:
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use("/", router);
+
 
 router.post('/handle',(req,res) => {
     const userguess = req.body
@@ -24,10 +26,7 @@ router.post('/handle',(req,res) => {
     
 });
 
-app.use("/", router);
-app.use(bodyParser.urlencoded());
-
-app.get('/words', (req: Request,res: Response)=>{
+router.get('/words', (req: Request,res: Response)=>{
     res.json(setNewWord())
 });
 

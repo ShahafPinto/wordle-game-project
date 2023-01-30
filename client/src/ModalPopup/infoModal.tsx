@@ -3,7 +3,7 @@ import { HeadContext } from '../providers/headContext';
 import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function InfoModal() {
+export default function InfoModal() {
     const appContext = useContext(HeadContext);
 
     const handleClose = ()=> {
@@ -40,5 +40,3 @@ function InfoModal() {
     </>
   );
 }
-
-export default InfoModal;

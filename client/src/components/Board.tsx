@@ -4,8 +4,7 @@ import {useContext, useEffect} from 'react';
 import '../App.scss';
 import { getStartGameFromServer } from '../tsx/server-requests';
 
-
-function Board(): JSX.Element{
+export default function Board(): JSX.Element{
     const game = useContext(GameContext)
     useEffect(():void=>{
        game?.autoFocus(game.currIndex[0],game.currIndex[1])
@@ -45,6 +44,3 @@ function Board(): JSX.Element{
         </>
     );
 }
-
-
-export default Board;
