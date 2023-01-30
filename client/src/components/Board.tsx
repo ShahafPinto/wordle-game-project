@@ -1,19 +1,16 @@
 import Keyboard from '../components/Keyboard';
 import { GameContext } from "../providers/gameContext";
 import {useContext, useEffect} from 'react';
-
 import '../App.scss';
-function Board(): JSX.Element{
+import { getStartGameFromServer } from '../tsx/server-requests';
+
+export default function Board(): JSX.Element{
     const game = useContext(GameContext)
-    useEffect(():void=>game?.autoFocus(game.currIndex[0],game.currIndex[1]),[])
+    useEffect(():void=>{
+       game?.autoFocus(game.currIndex[0],game.currIndex[1])
+       getStartGameFromServer() 
+    },[])
     useEffect(()=>game?.getGuess,game?.row);
-    // useEffect(():void=>{
-    //     // eslint-disable-next-line
-    //      game?.autoFocus(game.currIndex[0],game.currIndex[1])},[]);
- 
-    //  useEffect(()=>{
-    //      // eslint-disable-next-line
-    //      game?.getGuess},game?.row);
     
     return(
         <>
@@ -47,6 +44,3 @@ function Board(): JSX.Element{
         </>
     );
 }
-
-
-export default Board;

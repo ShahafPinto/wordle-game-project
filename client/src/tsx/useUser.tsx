@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IHeadContext } from '../providers/headContext';
 
-export interface Istorage {
-    name : string 
-}
-
 function useUser():IHeadContext{
     const [showInfo, setShowInfo] = useState(false);
     const [showForm, setShowForm] = useState(false);
@@ -30,7 +26,7 @@ function useUser():IHeadContext{
         }   
     }
     
-    const [username, setUsername] = React.useState<Istorage>(getUsername);
+    const [username, setUsername] = React.useState<string>(getUsername);
     
     useEffect(()=>{
         localStorage.setItem('name',JSON.stringify(username));
@@ -47,14 +43,11 @@ function useUser():IHeadContext{
         {   show: showInfo,
             showForm,
             setShowInfo, 
-           
             handleShowInfo,
             setShowForm,
             handleFormShow,
-            username,
             setUsername,
             getUsername,
-            logOut,
             handleLogOut,
             logout
         }

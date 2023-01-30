@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IGameContext } from '../providers/gameContext';
+import { sendGuess } from './server-requests';
 
-function useGame():IGameContext{
+export default function useGame():IGameContext{
+
   const letters:string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
   const keyboardKeys:string[][] = [
     ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -76,47 +78,36 @@ function useGame():IGameContext{
         onClick(key);
     }
   }
-  
-  //logic methods
-  const [word,setWordApi]=useState('');
-  useEffect(()=>{
-    fetch('/words').then(
-      (response) => response.json()
-    ).then((wordApi)=>{
-      setWordApi(wordApi)
-    })
-  },[])
 
   const getGuess=()=>{
-    console.log('hereeee')
       let guess:string ='';
+      console.log('here')
       newBoard[currIndex[0]].forEach((letter)=>{
           guess = guess + letter
       })
       console.log(`the guess is: ${guess}`);
-      checkGuess(guess);      
+      sendGuess(guess).then((value)=>{
+        const resultarr:(boolean|string)[] = value.state
+
+        if (resultarr){
+          for(let index=1;index<7;index++){
+              if(resultarr[index]==='bull'){ //check bull
+                  document.getElementById(`${currIndex[0]}${index-1}`)?.classList.add('bull');
+                  setBullCowOnKeyboard(guess[index-1],'bull');
+              }else if(resultarr[index]==='cow'){//check cow
+                  document.getElementById(`${currIndex[0]}${index-1}`)?.classList.add('cow');
+                  setBullCowOnKeyboard(guess[index-1],'cow');
+              }
+          }if(resultarr[0]===true){
+              const dialog = document.getElementById('successDialog') as HTMLDialogElement
+              dialog.show();
+          }if(currIndex[0]===3 && resultarr[0]===false){
+              checkFail();    
+          }    
+        }
+      })    
   }
   
-  const checkGuess=(guess:string)=>{
-      for(let index=0;index<5;index++){
-          if(word[index]===guess[index]){ //check bull
-              document.getElementById(`${currIndex[0]}${index}`)?.classList.add('bull');
-              setBullCowOnKeyboard(word[index],'bull');
-          }else{
-              for(let idx=0;idx<5;idx++){
-                  if(word[index]===guess[idx]){ //check cow
-                      document.getElementById(`${currIndex[0]}${idx}`)?.classList.add('cow');
-                      setBullCowOnKeyboard(word[index],'cow');
-                  }
-              }
-          }
-      }if(guess===word){
-        const dialog = document.getElementById('successDialog') as HTMLDialogElement
-        dialog.show();
-      }if(currIndex[0]===3 && guess!==word){
-        checkFail();
-  }}
-    
   const checkFail=()=>{
     const dialog = document.getElementById('failDialog') as HTMLDialogElement
     dialog.show();
@@ -136,31 +127,17 @@ function useGame():IGameContext{
     }
   }
 
-  
   return (
-    {letters,
-      inputBoard,
-      setInputBoard,
+    { inputBoard,
       currIndex,
-      setCurrIndex,
-      newBoard,
       row,
-      newCurrIndex,
-      nextRowIndex,
-      nextCellIndex ,
-      update,
       handleKeyUp,
       autoFocus,
-      onClick,
       hendleChangeInput,
       getGuess,
-      word,
-      checkGuess,
       keyboardKeys,
       hendleClick
     }
   )
 }
-
-export default useGame;
 

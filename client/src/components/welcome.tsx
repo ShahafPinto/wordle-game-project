@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react'
+import {CSSProperties} from 'react'
 import '../welcome.scss';
 
 interface Iprops{
@@ -9,7 +9,7 @@ interface IwelcomeStyle extends CSSProperties{
   '--i':string; 
 }
 
-function Welcome(props:Iprops) {
+export default function Welcome(props:Iprops) {
     let title:string[] = props.username.split('')
 
     const getStyle =(index:number)=>{
@@ -31,5 +31,3 @@ function Welcome(props:Iprops) {
     </div>
   )
 }
-
-export default Welcome

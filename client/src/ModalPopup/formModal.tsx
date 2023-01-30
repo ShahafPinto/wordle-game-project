@@ -2,15 +2,14 @@ import Modal from 'react-bootstrap/Modal';
 import { HeadContext } from '../providers/headContext';
 import { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import useUser from '../tsx/useUser';
 
-function FormModal() {
+export default function FormModal() {
     const appContext = useContext(HeadContext);
     
     const handleClose = ()=> {
         appContext?.setShowForm(false)
     };
-    const handleChangeUsername=(event:any)=> { //לעדכן טייפ של האיבנט
+    const handleChangeUsername=(event:React.ChangeEvent<HTMLInputElement>)=> { 
         const newValue = event.target.value;
         appContext?.setUsername(newValue);
     }
@@ -21,7 +20,6 @@ function FormModal() {
         show={appContext?.showForm}
         onHide={handleClose}
         backdrop="static"
-        // keyboard={false}
       >
         <Modal.Header closeButton >
           <Modal.Title>Log In
@@ -35,7 +33,6 @@ function FormModal() {
                     id="username-input"
                     type="text"
                     onChange={handleChangeUsername}
-                    // value={appContext?.inputName}
                     />
                 </div>
                 <input type="submit" value="submit" id="login-button" />
@@ -46,5 +43,3 @@ function FormModal() {
     </>
   );
 }
-
-export default FormModal;
