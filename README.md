@@ -2,7 +2,7 @@
 
 ## This repo has Multiple Repositories:
 
-* Clien-Side - Repository contain React application.
+* Client-Side - Repository contain React application.
 * Server-Side - Repository contain Express application.
 
 
